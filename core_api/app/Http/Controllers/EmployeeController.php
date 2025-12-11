@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-
+use App\Models\Employee;
 class EmployeeController extends Controller
 {
     /**
@@ -12,7 +12,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $users = DB::connection('mysql_external')->table('employees')->get();
+       
+        $users = Employee::all(['id','first_name','golongan','jabatan']);
+        //$users = DB::connection('mysql_external')->table('employees')->get();
 
         //return view('user.index', ['users' => $users]);
          return response()->json($users);
